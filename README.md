@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # electron-quick-start
 
 **Clone and run for a quick way to see Electron in action.**
@@ -43,3 +44,7 @@ Note: If you're using Linux Bash for Windows, [see this guide](https://www.howto
 ## License
 
 [CC0 1.0 (Public Domain)](LICENSE.md)
+=======
+# electron-player
+electron入门学习项目，非常简单
+>>>>>>> 5a3ea353f3dee89718e502b5c32bc0194576efc8
