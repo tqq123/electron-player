@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron')
+const { $ } = require('./helper')
 
-document.getElementById('add-music').addEventListener('click', () => {
+$('add-music').addEventListener('click', () => {
   ipcRenderer.send('add-music-window')
 })
