@@ -1,6 +1,6 @@
 
 # electron-player
-electron入门学习项目，非常简单
+electron入门学习项目
  
 npm i 安装依赖，本地跑的话直接npm start, 打成dmg的话就npm run dist，功能非常非常简单，就是简单的播放暂时，添加你本地的mp3格式的音乐，点击进度条改变没啦。
 
