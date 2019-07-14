@@ -1,0 +1,22 @@
+#musicList .col-2 .fa:hover {
+  cursor: pointer;
+}
+body {
+  background-image: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/01/ChMkJlbKxNiIHPUSAAQtpGUb6mUAALHNAJ4VSkABC28229.jpg');
+  background-size: cover;
+}
+.title {
+  color: #fff;
+}
+
+#musicList .list-group-item {
+  background: rgba(255,255,255, .3);
+}
+
+.fixed-bottom {
+  border-radius: 4px;
+  background: rgba(255,255,255, .3);
+}
+#progress {
+  background: rgba(255,255,255, .3);
+}

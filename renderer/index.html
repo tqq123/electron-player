@@ -2,15 +2,27 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>electron player</title>
+    <title>Electron Player</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
-    <div class="container mt-4">
-      <h1>music player</h1>
+    <div class="container mt-4" style="text-align: center;">
+      <h1 class="title">Music Player</h1>
       <button type="button" id="add-music" class="mt-4 btn btn-primary btn-lg btn-block">
-        add music
+        Add Music
       </button>
+      <div id="musicList" class="mt-4" style="padding-bottom: 105px;"></div>
+    </div>
+    <div class="container fixed-bottom pb-4">
+      <hr>
+      <div id="player-status" class="row my-2"></div>
+      <div class="progress" id="progress" style="cursor:pointer;">
+        <div id="current-progress" class="progress-bar bg-primary" role="progressbar" style="width: 0%;text-align: center;">
+
+        </div>
+      </div>
     </div>
     <script>
       require('./index.js')

@@ -3,8 +3,8 @@ const { BrowserWindow } = require('electron')
 class CreateWindow extends BrowserWindow {
   constructor(config, fileLocation) {
     const basicConfig = {
-      width: 800,
-      height: 600,
+      width: 960,
+      height: 620,
       webPreferences: {
         nodeIntegration: true
       },
