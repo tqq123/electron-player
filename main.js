@@ -2,13 +2,16 @@ const CreateWindow =  require('./CreateWindow')
 const DataStore = require('./renderer/MusicDataStore')
 const { app, ipcMain, dialog } = require('electron')
 
+
 const myStore = new DataStore({name: 'music'})
+
 
 let mainWindow
 let addWindow
 app.on('ready', () => {
   mainWindow = new CreateWindow({}, './renderer/index.html')
-  mainWindow.webContents.on('did-finish-load', (event) => {   
+  mainWindow.webContents.on('did-finish-load', (event) => {
+    
     event.sender.send('renderMusic', myStore.getTracks())
   })
   ipcMain.on('add-music-window', (event, res) => {
@@ -35,6 +38,18 @@ app.on('ready', () => {
   })
   ipcMain.on('delete-music', (event, data) => {
     const updateMusic = myStore.deleteTracks(data).getTracks()
+    mainWindow.send('renderMusic', updateMusic)
+  })
+
+  ipcMain.on('init-music', (event, data) => {
+    const musicList = data.map(item => ({
+      id: item.id,
+      path: item.url,
+      fileName: item.name
+    }))
+    const updateMusic = myStore.setTracks(musicList).getTracks()
+ 
+    
     mainWindow.send('renderMusic', updateMusic)
   })
 })

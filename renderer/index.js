@@ -1,9 +1,40 @@
 const { ipcRenderer } = require('electron')
 const { $, convertTime } = require('./helper')
+const { getSingerDetail, processSongsUrl } = require('./song')
 const musicAudio = new Audio()
 
 let allMusic = []
 let current = {}
+
+
+const normalizeSongs = list => {
+  let ret = []
+  list.forEach((item) => {
+    let { musicData } = item
+    if (musicData.songid && musicData.albummid && (!musicData.pay || musicData.pay.payalbumprice === 0)) {
+      ret.push({
+        id: musicData.songid,
+        mid: musicData.songmid,
+        name: musicData.songname,
+        album: musicData.albumname,
+        duration: musicData.interval,
+        url: musicData.url
+      })
+    }
+  })
+  return ret
+}
+const initMusic = () => {
+  getSingerDetail().then(res => {
+    if (res.code === 0) {
+      processSongsUrl(normalizeSongs(res.data.list)).then((songs) => {
+        ipcRenderer.send('init-music', songs)
+      })
+    }
+  })
+}
+
+
 $('add-music').addEventListener('click', () => {
   ipcRenderer.send('add-music-window')
 })
@@ -68,7 +99,7 @@ const updateProgressHTML = (currentTime, duration) => {
       musicAudio.src = current.path
       musicAudio.play()
       document.querySelectorAll('.fa-play').forEach(item => {
-        if (item.dataset.id === current.id) {
+        if (item.dataset.id == current.id) {
           item.classList.replace('fa-play', 'fa-pause')
         }
       })
@@ -94,10 +125,10 @@ $('musicList').addEventListener('click', e => {
   const { dataset, classList } = e.target
   const id = dataset && dataset.id
   if (id && classList.contains('fa-play')) {
-    if (current && current.id === id) {
+    if (current && current.id == id) {
       musicAudio.play()
     } else {
-      current = allMusic.find(item => item.id === id)
+      current = allMusic.find(item => item.id == id)
       musicAudio.src = current.path
       musicAudio.play()
       resetIcon()
@@ -108,7 +139,7 @@ $('musicList').addEventListener('click', e => {
     musicAudio.pause()
     classList.replace('fa-pause', 'fa-play')
   } else if (id && classList.contains('fa-trash')) {
-    if (id === current.id) {
+    if (id == current.id) {
       current = {}
       musicAudio.pause()
       document.querySelector('.fixed-bottom').style.display = 'none';
@@ -125,3 +156,5 @@ $('progress').addEventListener('click', e => {
   $('current-progress').style.width = `${setProgress}%`
   musicAudio.currentTime = musicAudio.duration * setPrecent
 })
+
+initMusic()

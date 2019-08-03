@@ -9,6 +9,11 @@ body {
   color: #fff;
 }
 
+#musicList .list-group {
+  overflow: scroll;
+  height: 313px;
+  border-radius: 2px;
+}
 #musicList .list-group-item {
   background: rgba(255,255,255, .3);
 }
