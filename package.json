@@ -4,7 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon --watch main.js --exec 'electron .'",
+    "start": "nodemon --watch main.js --exec electron .",
     "dist": "electron-builder"
   },
   "build": {
